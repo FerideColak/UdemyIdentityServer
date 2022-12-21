@@ -53,7 +53,7 @@ namespace UdemyIdentityServer.AuthServer
                     new Claim("given_name", "feride"),
                     new Claim("family_name", "colak")
                 } },
-                new TestUser() { SubjectId = "2", Username = "aycatrkm", Password = "567890", Claims=new List<Claim>(){
+                new TestUser() { SubjectId = "2", Username = "aycatrkmn", Password = "567890", Claims=new List<Claim>(){
                     new Claim("given_name", "ayca"),
                     new Claim("family_name", "turkmen")
                 } }
