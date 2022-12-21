@@ -1,4 +1,5 @@
-﻿using IdentityServer4.Models;
+﻿using IdentityServer4;
+using IdentityServer4.Models;
 using IdentityServer4.Test;
 using System.Security.Claims;
 
@@ -70,7 +71,7 @@ namespace UdemyIdentityServer.AuthServer
                 {
                     ClientId = "Client1",
                     ClientName = "Client 1 app uygulaması",
-                    ClientSecrets = new[] { new Secret("secret".Sha256())},
+                    ClientSecrets = new[] { new Secret("secret".Sha256()) },
                     AllowedGrantTypes =  GrantTypes.ClientCredentials,
                     AllowedScopes = {"api1.read"}
                 },
@@ -79,9 +80,20 @@ namespace UdemyIdentityServer.AuthServer
                 {
                     ClientId = "Client2",
                     ClientName = "Client 2 app uygulaması",
-                    ClientSecrets = new[] { new Secret("secret".Sha256())},
+                    ClientSecrets = new[] { new Secret("secret".Sha256()) },
                     AllowedGrantTypes =  GrantTypes.ClientCredentials,
                     AllowedScopes = {"api1.read", "api1.update", "api2.write", "api2.update"}
+                },
+
+                new Client()
+                {
+                    ClientId = "Client",
+                    ClientName = "Client1-Mvc",
+                    ClientSecrets = new[] { new Secret("secret".Sha256()) },
+                    AllowedGrantTypes =  GrantTypes.Hybrid,  // code ve id_token ikisi de response type olarak secildigi icin hybrid secilir
+                    RedirectUris = new List<string>{ "https://localhost:7091/sign-oidc" },  // code ve id_token'ın donecegi ve token'ı alacak olan url, diger sayfalara bu url'den yonlendirme yapılır
+                    AllowedScopes = { IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile }  //uyelik sistemi
                 }
             };
         }
