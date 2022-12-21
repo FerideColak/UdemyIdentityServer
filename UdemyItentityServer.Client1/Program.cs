@@ -8,6 +8,13 @@ builder.Services.AddAuthentication(opts =>
      */
     opts.DefaultScheme = "Cookies";
     opts.DefaultChallengeScheme = "oidc";
+}).AddCookie("Cookies").AddOpenIdConnect("oidc", opts =>
+{
+    opts.SignInScheme = "Cookies";
+    opts.Authority = "https://localhost:7122"; 
+    opts.ClientId = "Client1-Mvc"; 
+    opts.ClientSecret = "secret";
+    opts.ResponseType = "code id_token";
 });
 
 var app = builder.Build();
