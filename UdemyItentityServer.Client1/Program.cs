@@ -1,7 +1,7 @@
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+
 builder.Services.AddAuthentication(opts =>  // Auth Server ile haberleþme
 {   /*
      Þemalarýn kullaným amacý, cookie'leri kullaným amacýna gore ayýrabilmektir.
@@ -16,6 +16,7 @@ builder.Services.AddAuthentication(opts =>  // Auth Server ile haberleþme
     opts.ClientSecret = "secret";
     opts.ResponseType = "code id_token"; //code, access token almak için authorization code; id_token, token'ý doðrulamak için
 });
+builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
@@ -31,7 +32,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

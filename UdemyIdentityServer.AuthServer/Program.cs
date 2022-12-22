@@ -3,14 +3,14 @@ using UdemyIdentityServer.AuthServer;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
-
 builder.Services.AddIdentityServer().AddInMemoryApiResources(Config.GetApiResources())
     .AddInMemoryApiScopes(Config.GetApiScopes())
     .AddInMemoryClients(Config.GetClients())
     .AddTestUsers(Config.GetUsers().ToList())
     .AddInMemoryIdentityResources(Config.GetIdentityResources())
     .AddDeveloperSigningCredential();
+
+builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
