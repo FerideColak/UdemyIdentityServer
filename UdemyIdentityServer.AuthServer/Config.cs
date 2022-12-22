@@ -81,19 +81,21 @@ namespace UdemyIdentityServer.AuthServer
                     ClientId = "Client2",
                     ClientName = "Client 2 app uygulaması",
                     ClientSecrets = new[] { new Secret("secret".Sha256()) },
-                    AllowedGrantTypes =  GrantTypes.ClientCredentials,
+                    AllowedGrantTypes =  GrantTypes.ClientCredentials, 
                     AllowedScopes = {"api1.read", "api1.update", "api2.write", "api2.update"}
                 },
 
                 new Client()
                 {
-                    ClientId = "Client",
-                    ClientName = "Client1-Mvc",
+                    ClientId = "Client1-Mvc",
+                    RequirePkce = false,  // require proof key'i false cunku client secret guvenli bir sekilde tutuluyor
+                    ClientName = "Client 1 app mvc uygulaması",
                     ClientSecrets = new[] { new Secret("secret".Sha256()) },
                     AllowedGrantTypes =  GrantTypes.Hybrid,  // code ve id_token ikisi de response type olarak secildigi icin hybrid secilir
-                    RedirectUris = new List<string>{ "https://localhost:7091/sign-oidc" },  // code ve id_token'ın donecegi ve token'ı alacak olan url, diger sayfalara bu url'den yonlendirme yapılır
+                    RedirectUris = new List<string>{ "https://localhost:7091/signin-oidc" },  // code ve id_token'ın donecegi ve token'ı alacak olan url, diger sayfalara bu url'den yonlendirme yapılır
                     AllowedScopes = { IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile }  //uyelik sistemi
+                    //Kullanıcı Login sayfasına yonlendirilmiyorsa cookie temizlenmeli
                 }
             };
         }
